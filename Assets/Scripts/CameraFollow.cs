@@ -15,7 +15,7 @@ public class CameraFollow : MonoBehaviour
         }
 
         Vector3 desiredPosition = target.position + offset;
-
+                                                                    // KAMERAYI SMOOTH SEKILDE TAKÝP ETTÝRME
         transform.position = Vector3.Lerp(
             transform.position,
             desiredPosition,

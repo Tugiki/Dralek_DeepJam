@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
-
+                                                                    // ZIPLAMA HAREKETÝ VE KOSULU
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void FixedUpdate()
-    {
+    {                                                   // TUSA BASILDIÐINDA HAREKET ETME
         rb.linearVelocity = new Vector2(
             horizontalInput * moveSpeed,
             rb.linearVelocity.y
@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
-    {
+    {                                                                   //ZEMINLE TEMAS KONTROLU
         if (collision.gameObject.name == "Ground")
         {
             isGrounded = true;
@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void OnCollisionExit2D(Collision2D collision)
-    {
+    {                                                               //ZEMINLE TEMAS ETMEME KONTROLU
         if (collision.gameObject.name == "Ground")
         {
             isGrounded = false;
