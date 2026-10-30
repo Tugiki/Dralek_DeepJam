@@ -293,6 +293,7 @@ GameObject:
   - component: {fileID: 491886609}
   - component: {fileID: 491886610}
   - component: {fileID: 491886611}
+  - component: {fileID: 491886612}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -480,6 +481,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   attackDamage: 1
+  attackInterval: 1
 --- !u!114 &491886611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -495,6 +497,29 @@ MonoBehaviour:
   maxHealth: 5
   healthText: {fileID: 1211054306}
   gameOverText: {fileID: 653181249}
+  restartButton: {fileID: 1800650879}
+--- !u!95 &491886612
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 491886604}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ee5f715b617451043bd56c100a9878ee, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &653181247
 GameObject:
   m_ObjectHideFlags: 0
