@@ -8,6 +8,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private float horizontalInput;
     private bool isGrounded;
+    private float facingDirection = 1f;
+
+    public float FacingDirection => facingDirection;
 
     private void Awake()
     {
@@ -17,7 +20,17 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
-                                                                    // ZIPLAMA HAREKETÝ VE KOSULU
+
+        if (horizontalInput > 0)
+        {
+            facingDirection = 1f;
+        }
+        else if (horizontalInput < 0)
+        {
+            facingDirection = -1f;
+        }
+
+                                                                // ZIPLAMA HAREKETÝ VE KOSULU
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);

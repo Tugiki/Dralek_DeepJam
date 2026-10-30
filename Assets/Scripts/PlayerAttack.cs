@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -7,22 +8,59 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float attackRange = 0.8f;
     [SerializeField] private LayerMask enemyLayers;
     [SerializeField] private int attackDamage = 1;
+    [SerializeField] private float attackInterval = 1f;
+    
+    private PlayerController playerController;
+    private float nextAttackTime;
+    private float attackPointStartX;
 
-    private void Update()
-    {                                                       // DEGISTIRILECEK ATTACK SISTEMÝ
-        if (Input.GetKeyDown(KeyCode.J))
+    private void Awake()
+    {
+        playerController = GetComponent<PlayerController>();
+
+        if (attackPoint != null)
         {
-            Attack();
+            attackPointStartX = Mathf.Abs(attackPoint.localPosition.x);
         }
     }
+    private void Update()
+    {                                                       // DEGISTIRILECEK ATTACK SISTEMÝ
+        if (Time.timeScale == 0f)
+        {
+            return;
+        }
 
-    private void Attack()
-    {                                                                   // ATTACK RANGE ICERÝSÝNDE KALAN DUÞMANI BULMA
+        UpdateAttackDirection();
+
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(
             attackPoint.position,
             attackRange,
             enemyLayers
         );
+
+        if (hitEnemies.Length > 0 && Time.time >= nextAttackTime)
+        {
+            Attack(hitEnemies);
+            nextAttackTime = Time.time + attackInterval;
+        }
+    }
+
+    private void UpdateAttackDirection()
+    {
+        if (playerController == null || attackPoint == null)
+        {
+            return;
+        }
+
+        float direction = playerController.FacingDirection;
+
+        Vector3 position = attackPoint.localPosition;
+        position.x = attackPointStartX * direction;
+        attackPoint.localPosition = position;
+    }
+
+    private void Attack(Collider2D[] hitEnemies)
+    {                                                                   // ATTACK RANGE ICERÝSÝNDE KALAN DUÞMANI BULMA
 
         Debug.Log("Saldýrý yapýldý! Algýlanan hedef sayýsý: " + hitEnemies.Length);
 
