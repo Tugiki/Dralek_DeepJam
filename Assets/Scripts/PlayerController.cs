@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce = 10f;
 
     private Rigidbody2D rb;
+    private Animator animator;
     private float horizontalInput;
     private bool isGrounded;
     private float facingDirection = 1f;
@@ -15,22 +16,31 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        horizontalInput = 1f;
     }
 
     private void Update()
     {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-
-        if (horizontalInput > 0)
+        // Yön tuþuna basýldýðýnda hareket yönünü deðiþtir.
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
+            horizontalInput = 1f;
             facingDirection = 1f;
         }
-        else if (horizontalInput < 0)
+        else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
+            horizontalInput = -1f;
             facingDirection = -1f;
         }
 
-                                                                // ZIPLAMA HAREKETÝ VE KOSULU
+        if (animator != null)
+        {
+            animator.SetFloat("Speed", Mathf.Abs(horizontalInput));
+            animator.SetBool("IsGrounded", isGrounded);
+        }
+
+        // ZIPLAMA HAREKETÝ VE KOSULU
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
@@ -39,7 +49,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void FixedUpdate()
-    {                                                   // TUSA BASILDIÐINDA HAREKET ETME
+    {   // TUSA BASILDIÐINDA HAREKET ETME
         rb.linearVelocity = new Vector2(
             horizontalInput * moveSpeed,
             rb.linearVelocity.y
@@ -55,7 +65,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void OnCollisionExit2D(Collision2D collision)
-    {                                                               //ZEMINLE TEMAS ETMEME KONTROLU
+    {   //ZEMINLE TEMAS ETMEME KONTROLU
         if (collision.gameObject.name == "Ground")
         {
             isGrounded = false;

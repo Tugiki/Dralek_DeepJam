@@ -2055,6 +2055,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maxHealth: 3
+  coinPrefab: {fileID: 3288174897281350010, guid: 5a7b01d6afa76df4693591425e0724fe, type: 3}
 --- !u!114 &1913680430
 MonoBehaviour:
   m_ObjectHideFlags: 0
