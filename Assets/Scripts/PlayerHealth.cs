@@ -56,6 +56,11 @@ public class PlayerHealth : MonoBehaviour
         currentHealth -= damage;
         currentHealth = Mathf.Max(currentHealth, 0);
 
+        if (ScoreManager.Instance != null)
+        {
+            ScoreManager.Instance.ResetCombo();
+        }
+
         UpdateHealthUI();
 
         if (spriteRenderer != null)
@@ -75,24 +80,30 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+
     private void Die()
     {
         isDead = true;
 
-        if (gameOverText != null)
+        if (LeaderboardManager.Instance != null &&
+            ScoreManager.Instance != null)
         {
-            gameOverText.gameObject.SetActive(true);
+            int finalScore = ScoreManager.Instance.GetScore();
+            LeaderboardManager.Instance.SaveScore(finalScore);
         }
+
+        if (gameOverText != null)
+            gameOverText.gameObject.SetActive(true);
 
         if (restartButton != null)
-        {
             restartButton.SetActive(true);
-        }
 
+        Debug.Log("Oyuncunun skoru kaydedildi!");
         Debug.Log("Oyuncunun caný bitti! Oyun durduruldu.");
 
         Time.timeScale = 0f;
     }
+
 
     private void UpdateHealthUI()
     {

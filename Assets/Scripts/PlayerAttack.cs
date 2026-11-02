@@ -8,7 +8,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float attackRange = 0.8f;
     [SerializeField] private LayerMask enemyLayers;
     [SerializeField] private int attackDamage = 1;
-    [SerializeField] private float attackInterval = 1f;
+    [SerializeField] private float attackInterval = 0.1f;
     
     private PlayerController playerController;
     private float nextAttackTime;
