@@ -92,6 +92,11 @@ public class PlayerHealth : MonoBehaviour
             LeaderboardManager.Instance.SaveScore(finalScore);
         }
 
+        if (LeaderboardManager.Instance != null)
+        {
+            LeaderboardManager.Instance.ShowLeaderboard();
+        }
+
         if (gameOverText != null)
             gameOverText.gameObject.SetActive(true);
 

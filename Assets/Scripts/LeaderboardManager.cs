@@ -1,5 +1,7 @@
 
 using UnityEngine;
+using TMPro;
+using System.Text;
 
 public class LeaderboardManager : MonoBehaviour
 {
@@ -8,16 +10,21 @@ public class LeaderboardManager : MonoBehaviour
     private const int maxScores = 10;
     private const string scoreKey = "LeaderboardScore_";
 
+    [SerializeField] private TMP_Text leaderboardText;
+
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
         }
-        else    
+        else
         {
             Destroy(gameObject);
+            return;
         }
+
+        UpdateLeaderboardUI();
     }
 
     public void SaveScore(int newScore)
@@ -49,6 +56,7 @@ public class LeaderboardManager : MonoBehaviour
         }
 
         PlayerPrefs.Save();
+        UpdateLeaderboardUI();
 
         Debug.Log("Skor liderlik tablosuna kaydedildi: " + newScore);
     }
@@ -61,5 +69,31 @@ public class LeaderboardManager : MonoBehaviour
         }
 
         return PlayerPrefs.GetInt(scoreKey + index, 0);
+    }
+
+    public void UpdateLeaderboardUI()
+    {
+        if (leaderboardText == null) return;
+
+        StringBuilder text = new StringBuilder();
+
+        text.AppendLine("LEADERBOARD");
+
+        for (int i = 0; i < maxScores; i++)
+        {
+            int savedScore = GetScoreAt(i);
+
+            text.AppendLine((i + 1) + ". " + savedScore + " puan");
+        }
+
+        leaderboardText.text = text.ToString();
+    }
+
+    public void ShowLeaderboard()
+    {
+        if (leaderboardText == null) return;
+
+        UpdateLeaderboardUI();
+        leaderboardText.gameObject.SetActive(true);
     }
 }

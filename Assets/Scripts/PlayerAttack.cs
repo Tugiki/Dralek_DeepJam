@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private Transform attackPoint;
-    [SerializeField] private float attackRange = 0.8f;
+    [SerializeField] private float attackRange = 0.6f;
     [SerializeField] private LayerMask enemyLayers;
     [SerializeField] private int attackDamage = 1;
     [SerializeField] private float attackInterval = 0.1f;
