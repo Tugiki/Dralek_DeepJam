@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2598812059556513342}
   - component: {fileID: 7551745564280561142}
   - component: {fileID: 5985029564003195652}
-  - component: {fileID: 3303345879213314930}
   - component: {fileID: 8044309882669646076}
   - component: {fileID: 2938725574237043774}
   m_Layer: 6
@@ -185,21 +184,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maxHealth: 1
   coinPrefab: {fileID: 3288174897281350010, guid: 5a7b01d6afa76df4693591425e0724fe, type: 3}
---- !u!114 &3303345879213314930
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 942171398370993024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e16c51cc1da2db14e8197a815c2b5bec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyPatrol
-  moveSpeed: 3
-  leftLimit: -5.5
-  rightLimit: 5.5
 --- !u!114 &8044309882669646076
 MonoBehaviour:
   m_ObjectHideFlags: 0
