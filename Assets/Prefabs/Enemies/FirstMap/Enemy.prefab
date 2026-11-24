@@ -289,8 +289,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyPatrol
   moveSpeed: 3
-  leftLimit: -5.5
-  rightLimit: 5.5
+  leftLimit: -8.5
+  rightLimit: 8.5
 --- !u!114 &2230540926447797843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,5 +316,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79461c2e532e6b44b84ec3b4020bbead, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyRise
-  riseDistance: 3
+  riseDistance: 4.59
   riseSpeed: 3

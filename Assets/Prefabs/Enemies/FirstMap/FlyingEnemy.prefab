@@ -210,8 +210,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlyingEnemyMovement
   moveSpeed: 2
-  leftLimit: -5.5
-  rightLimit: 5.5
+  leftLimit: -8.5
+  rightLimit: 8.5
   waveHeight: 1
   waveSpeed: 2
 --- !u!1 &1053016065100154375

@@ -6,6 +6,9 @@ public class GameLoop : MonoBehaviour
     [Header("Game Settings")]
     [SerializeField] private float survivalDuration = 120f;
 
+    [Header("Spawn System")]
+    [SerializeField] private EnemySpawner enemySpawner;
+
     private float elapsedTime;
     private bool gameStarted;
     private bool bossPhase;
@@ -38,6 +41,11 @@ public class GameLoop : MonoBehaviour
     {
         bossPhase = true;
         gameStarted = false;
+
+        if (enemySpawner != null)
+        {
+            enemySpawner.StopSpawning();
+        }
 
         Debug.Log("Hayatta kalma süresi tamamlandý! Boss aþamasý baþladý!");
     }
