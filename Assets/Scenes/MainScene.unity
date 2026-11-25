@@ -637,7 +637,7 @@ GameObject:
   - component: {fileID: 491886609}
   - component: {fileID: 491886611}
   - component: {fileID: 491886612}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2386,7 +2386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acf1f85e334848c49a60bf098664bcec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameLoop
-  survivalDuration: 40
+  survivalDuration: 120
   enemySpawner: {fileID: 155070845}
 --- !u!1 &1800650879
 GameObject:

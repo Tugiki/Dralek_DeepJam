@@ -1,12 +1,13 @@
+
 using UnityEngine;
 
 public class EnemyRangedAttack : MonoBehaviour
 {
-    [SerializeField] private Transform target;
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform firePoint;
 
-    [SerializeField] private float attackInterval = 2f;
+    [SerializeField] private float minAttackInterval = 1.5f;
+    [SerializeField] private float maxAttackInterval = 4f;
 
     private float nextAttackTime;
 
@@ -14,19 +15,26 @@ public class EnemyRangedAttack : MonoBehaviour
     {
         if (Time.timeScale == 0f) return;
 
-        if (target == null || projectilePrefab == null || firePoint == null)
+        if (projectilePrefab == null || firePoint == null)
             return;
 
         if (Time.time >= nextAttackTime)
         {
             Shoot();
-            nextAttackTime = Time.time + attackInterval;
+
+            float randomInterval = Random.Range(
+                minAttackInterval,
+                maxAttackInterval
+            );
+
+            nextAttackTime = Time.time + randomInterval;
         }
     }
 
     private void Shoot()
     {
-        float direction = transform.position.x < 0f ? 1f : -1f;
+        float screenMiddle = Camera.main.transform.position.x;
+        float direction = transform.position.x < screenMiddle ? 1f : -1f;
 
         Vector3 enemyScale = transform.localScale;
         enemyScale.x = Mathf.Abs(enemyScale.x) * direction;

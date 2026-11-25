@@ -5,15 +5,15 @@ public class EnemyContactDamage : MonoBehaviour
 {
     [SerializeField] private int damage = 1;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!collision.gameObject.CompareTag("Player"))
+        if (!other.CompareTag("Player"))
         {
             return;
         }
 
         PlayerHealth playerHealth =
-            collision.gameObject.GetComponent<PlayerHealth>();
+            other.GetComponent<PlayerHealth>();
 
         if (playerHealth != null)
         {
