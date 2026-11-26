@@ -1,17 +1,21 @@
+
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float jumpForce = 10f;
+    [SerializeField] private float slamSpeed = 20f;
 
     private Rigidbody2D rb;
     private Animator animator;
     private float horizontalInput;
     private bool isGrounded;
+    private bool isGroundSlamming;
     private float facingDirection = 1f;
 
     public float FacingDirection => facingDirection;
+    public bool IsGroundSlamming => isGroundSlamming;
 
     private void Awake()
     {
@@ -22,50 +26,84 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        // Yön tuþuna basýldýðýnda hareket yönünü deðiþtir.
-        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.D) ||
+            Input.GetKeyDown(KeyCode.RightArrow))
         {
             horizontalInput = 1f;
             facingDirection = 1f;
         }
-        else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (Input.GetKeyDown(KeyCode.A) ||
+                 Input.GetKeyDown(KeyCode.LeftArrow))
         {
             horizontalInput = -1f;
             facingDirection = -1f;
         }
 
-        if (animator != null)
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)) && isGrounded &&
+            !isGroundSlamming)
         {
-            animator.SetFloat("Speed", Mathf.Abs(horizontalInput));
-            animator.SetBool("IsGrounded", isGrounded);
+            rb.linearVelocity = new Vector2(
+                rb.linearVelocity.x,
+                jumpForce
+            );
+
+            isGrounded = false;
         }
 
-        // ZIPLAMA HAREKETÝ VE KOSULU
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (!isGrounded && !isGroundSlamming &&
+            (Input.GetKeyDown(KeyCode.S) ||
+             Input.GetKeyDown(KeyCode.DownArrow)))
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-            isGrounded = false;
+            StartGroundSlam();
+        }
+
+        if (animator != null)
+        {
+            animator.SetFloat(
+                "Speed",
+                isGroundSlamming ? 0f : Mathf.Abs(horizontalInput)
+            );
+
+            animator.SetBool("IsGrounded", isGrounded);
         }
     }
 
     private void FixedUpdate()
-    {   // TUSA BASILDIÐINDA HAREKET ETME
+    {
+        if (isGroundSlamming)
+        {
+            rb.linearVelocity = new Vector2(0f, -slamSpeed);
+            return;
+        }
+
         rb.linearVelocity = new Vector2(
             horizontalInput * moveSpeed,
             rb.linearVelocity.y
         );
     }
 
+    private void StartGroundSlam()
+    {
+        isGroundSlamming = true;
+        rb.linearVelocity = new Vector2(0f, -slamSpeed);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
-    {                                                                   //ZEMINLE TEMAS KONTROLU
+    {
         if (collision.gameObject.name == "Ground")
         {
             isGrounded = true;
+
+            if (isGroundSlamming)
+            {
+                isGroundSlamming = false;
+                rb.linearVelocity = Vector2.zero;
+            }
         }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
-    {   //ZEMINLE TEMAS ETMEME KONTROLU
+    {
         if (collision.gameObject.name == "Ground")
         {
             isGrounded = false;

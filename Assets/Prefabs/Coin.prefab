@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7630194082041402680}
   - component: {fileID: 2871744099170153567}
   - component: {fileID: -4601047035998124423}
+  - component: {fileID: -1714555351066951369}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Untagged
@@ -141,3 +142,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc2791ed19b2ccb46bc9b3467a71c52f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CoinPickup
+--- !u!114 &-1714555351066951369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3288174897281350010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ad93e26d18d1684a8259e19c50de944, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CoinMovement
+  upwardDistance: 0.5
+  upwardSpeed: 3
+  downwardSpeed: 5
+  groundY: -1.5

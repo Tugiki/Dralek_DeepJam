@@ -198,10 +198,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5d4b899edd993646b985efa2798b518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyRangedAttack
-  target: {fileID: 0}
   projectilePrefab: {fileID: 4198707905257682712, guid: 3660d7484d765ba42a4791ae4e5c9c20, type: 3}
   firePoint: {fileID: 3306071954578398538}
-  attackInterval: 2
+  minAttackInterval: 2
+  maxAttackInterval: 6
 --- !u!114 &486436903963125196
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+
 using UnityEngine;
 
 public class WeaponFollow : MonoBehaviour
@@ -22,6 +23,18 @@ public class WeaponFollow : MonoBehaviour
             return;
         }
 
+        if (playerController.IsGroundSlamming)
+        {
+            transform.localPosition = new Vector3(
+                0f,
+                -distance,
+                0f
+            );
+
+            transform.localRotation = Quaternion.Euler(0f, 0f, -90f);
+            return;
+        }
+
         float direction = playerController.FacingDirection;
 
         transform.localPosition = new Vector3(
@@ -29,5 +42,7 @@ public class WeaponFollow : MonoBehaviour
             0f,
             0f
         );
+
+        transform.localRotation = Quaternion.identity;
     }
 }
